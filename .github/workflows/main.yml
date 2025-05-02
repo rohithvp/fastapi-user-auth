@@ -1,0 +1,35 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps: 
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Login to dockerhub
+      run: echo "${{ secrets.Docker_Password }}" | docker login -u "${{ secrets.Docker_Username }}" --password-stdin
+
+    - name: Build Docker image
+      run: docker build -t ${{ secrets.Docker_Username}}/user-auth-app:latest .
+
+    - name: Push Docker Image
+      run: docker push ${{ secrets.Docker_Username}}/user-auth-app:latest
+
+    - name: Deploy to EC2 via SSH 
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_Host }}
+        username: ${{ secrets.EC2_User }}
+        key: ${{ secrets.EC2_key }}
+        script:  |
+          docker pull ${{ secrets.Docker_Username}}/user-auth-app:latest
+          docker stop user-auth-app || true
+          docker rm user-auth-app || true
+          docker run -d --name user-auth-app -p 80:80 ${{ Docker_Username }}/user-auth-app:latest
