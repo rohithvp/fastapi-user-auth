@@ -32,4 +32,4 @@ jobs:
           docker pull ${{ secrets.DOCKER_USERNAME}}/user-auth-app:latest
           docker stop user-auth-app || true
           docker rm user-auth-app || true
-          docker run -d --name user-auth-app -p 80:80 ${{ DOCKER_USERNAME }}/user-auth-app:latest
+          docker run -d --name user-auth-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/user-auth-app:latest
