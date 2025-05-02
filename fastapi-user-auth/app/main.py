@@ -2,7 +2,7 @@ from fastapi import FastAPI ,Depends, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi import Request
-from sqlalchemy.orm import session
+from sqlalchemy.orm import Session
 
 from app import models
 from app.database import sessionlocal, engine
@@ -32,7 +32,7 @@ def post_register(
         username: str = Form(...),
         email: str = Form(...),
         password: str = Form(...),
-        db: session = Depends(get_db)
+        db: Session = Depends(get_db)
 ):
     user_exists = db.query(User).filter(User.username== username).first()
     if user_exists:
@@ -56,7 +56,7 @@ def post_login(
     request:Request,    
     username: str = Form(...),
     password: str = Form(...),
-    db: session = Depends(get_db)
+    db: Session = Depends(get_db)
 ):
     user = db.query(User).filter(User.username == username).first()
     if not user or not verify_password(password, user.password):
