@@ -24,7 +24,7 @@ jobs:
     - name: Push Docker Image
       run: |
         ls -l 
-        docker push ${{ secrets.DOCKER_USERNAME}}/user-auth-app:3
+        docker push ${{ secrets.DOCKER_USERNAME }}/user-auth-app:3
 
     - name: Deploy to EC2 via SSH 
       uses: appleboy/ssh-action@master
