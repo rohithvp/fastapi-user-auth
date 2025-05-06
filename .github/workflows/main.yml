@@ -33,7 +33,7 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_KEY }}
         script:  |
-          docker pull ${{ secrets.DOCKER_USERNAME}}/user-auth-app:3
+          docker pull ${{ secrets.DOCKER_USERNAME }}/user-auth-app:3
           docker stop user-auth-app || true
           docker rm user-auth-app || true
           docker run -d --name user-auth-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/user-auth-app:3
