@@ -18,7 +18,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        ls -l
+        cd fastapi-user-auth
         docker build -t ${{ secrets.DOCKER_USERNAME }}/user-auth-app:3 .
       
       
