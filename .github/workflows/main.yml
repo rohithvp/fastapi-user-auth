@@ -37,7 +37,7 @@ jobs:
           sudo apt install -y docker.io
           sudo systemctl start docker
           sudo usermod -aG docker $USER
-          docker pull ${{ secrets.DOCKER_USERNAME }}/user-auth-app:7
-          docker stop user-auth-app || true
-          docker rm user-auth-app || true
-          docker run -d --name user-auth-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/user-auth-app:7
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/user-auth-app:7
+          sudo docker stop user-auth-app || true
+          sudo docker rm user-auth-app || true
+          sudo docker run -d --name user-auth-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/user-auth-app:7
