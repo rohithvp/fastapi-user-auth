@@ -33,6 +33,7 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_KEY }}
         script:  |
+          whoami
           sudo apt update
           sudo apt install -y docker.io
           sudo systemctl start docker
