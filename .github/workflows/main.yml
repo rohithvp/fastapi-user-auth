@@ -33,7 +33,12 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_KEY }}
         script:  |
-          docker pull ${{ secrets.DOCKER_USERNAME }}/user-auth-app:7
-          docker stop user-auth-app || true
-          docker rm user-auth-app || true
-          docker run -d --name user-auth-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/user-auth-app:7
+          whoami
+          sudo apt update
+          sudo apt install -y docker.io
+          sudo systemctl start docker
+          sudo usermod -aG docker $USER
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/user-auth-app:7
+          sudo docker stop user-auth-app || true
+          sudo docker rm user-auth-app || true
+          sudo docker run -d --name user-auth-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/user-auth-app:7
