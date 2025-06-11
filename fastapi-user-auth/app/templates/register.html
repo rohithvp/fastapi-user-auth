@@ -1,19 +1,39 @@
+<!-- app/templates/register.html -->
 <!DOCTYPE html>
-<html>
-<head><title>Register</title></head>
-<body>
-  <h2>Register</h2>
-  <form method="post" action="/register">
-    Username: <input type="text" name="username"><br>
-    Email: <input type="email" name="email"><br>
-    Password: <input type="password" name="password"><br>
-    <button type="submit">Register</button>
-  </form>
-  {% if message %}
-    <p style="color:red;">{{ message }}</p>
-  {% endif %}
-  <p>Already have an account? <a href="/">Login here</a></p>
-  <!--<p>Hello from FastAPI: {{ request.url.path }}</p>-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <form method="post" class="bg-white p-6 rounded shadow-md w-full max-w-sm">
+        <h2 class="text-2xl font-bold mb-4 text-center">Register</h2>
 
+        {% if message %}
+        <p class="text-red-500 text-sm text-center mb-2">{{ message }}</p>
+        {% endif %}
+
+        <label class="block mb-2">
+            <span class="text-gray-700">Username</span>
+            <input type="text" name="username" required class="w-full p-2 border rounded mt-1">
+        </label>
+
+        <label class="block mb-2">
+            <span class="text-gray-700">Email</span>
+            <input type="email" name="email" required class="w-full p-2 border rounded mt-1">
+        </label>
+
+        <label class="block mb-4">
+            <span class="text-gray-700">Password</span>
+            <input type="password" name="password" required class="w-full p-2 border rounded mt-1">
+        </label>
+
+        <button type="submit" class="bg-green-500 text-white w-full py-2 rounded hover:bg-green-600">Register</button>
+
+        <p class="text-sm text-center mt-4">
+            Already have an account? <a href="/" class="text-blue-600 underline">Login</a>
+        </p>
+    </form>
 </body>
 </html>
