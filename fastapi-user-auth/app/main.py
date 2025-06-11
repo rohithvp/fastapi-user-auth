@@ -2,20 +2,20 @@ from fastapi import FastAPI ,Depends, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi import Request
-'''from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session
 
 from app import models
 from app.database import sessionlocal, engine
 from app.models import User
 from app.auth_pass import hash_password, verify_password
 
-models.Base.metadata.create_all(bind= engine)'''
+models.Base.metadata.create_all(bind= engine)
 
 
 app = FastAPI()
 templates= Jinja2Templates(directory="app/templates")   
 
-''' def get_db():
+def get_db():
      db = sessionlocal()
      try:
          yield db
@@ -27,7 +27,7 @@ def register_user(request: Request):
     return templates.TemplateResponse("register.html", {"request": request  })
 
 @app.post("/register", response_class=HTMLResponse)
- def post_register(
+def post_register(
      request : Request,
          username: str = Form(...),
          email: str = Form(...),
@@ -43,7 +43,7 @@ def register_user(request: Request):
      db.add(new_user)
      db.commit()
      db.refresh(new_user)
-     return RedirectResponse("/", status_code=303)'''
+     return RedirectResponse("/", status_code=303)
     
 
 
@@ -51,8 +51,8 @@ def register_user(request: Request):
 def get_login_page(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 
-'''@app.post("/", response_class=HTMLResponse)
- def post_login(
+@app.post("/", response_class=HTMLResponse)
+def post_login(
      request:Request,    
      username: str = Form(...),
      password: str = Form(...),
@@ -65,4 +65,4 @@ def get_login_page(request: Request):
      return templates.TemplateResponse("dashboard.html", {"request": request, "username": user.username})
 @app.get("/dashboard", response_class=HTMLResponse)
 def get_dashboard(request: Request):
-    return templates.TemplateResponse("dashboard.html", {"request": request})'''
+    return templates.TemplateResponse("dashboard.html", {"request": request})
